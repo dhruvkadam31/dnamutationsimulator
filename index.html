@@ -1,0 +1,125 @@
+<html>
+<head>
+  <title>DNA Mutation Simulator</title>
+  <style>
+    body {
+      background-color: #f0f8ff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      width: 600px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    input[type="text"],
+    select {
+      font-size: 24px;
+      padding: 10px;
+      margin: 10px 0;
+      width: 80%;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    input[type="submit"] {
+      font-size: 24px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 15px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    h2,h3 {
+      font-size: 24px;
+      color: green;
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>DNA Mutation Simulator</h1>
+
+    <form onsubmit="mutate(event)">
+      <input type="text" placeholder="Enter DNA (A, T, G, C)" id="idna" /><br />
+      <select id="dna">
+        <option value="substitution">Substitution</option>
+        <option value="insertion">Insertion</option>
+        <option value="deletion">Deletion</option>
+      </select><br />
+      <input type="submit" value="Mutate" />
+    </form>
+
+    <h2 id="msg"></h2>
+    <h3 id="msg2"></h3>
+	
+  </div>
+
+  <script>
+    function mutate(e) {
+      e.preventDefault();
+      let msg2 = document.getElementById("msg2");
+
+      let msg = document.getElementById("msg");
+      let type = document.getElementById("dna").value;
+      let input = document.getElementById("idna");
+      let dna = input.value.trim().toUpperCase();
+
+      if (dna === "") {
+        alert("DNA cannot be blank");
+        msg.innerHTML = "";
+        input.focus();
+        return;
+      }
+
+      if (!dna.match(/^[ATGC]+$/)) {
+        alert("Enter valid DNA (only A, T, G, C)");
+        msg.innerHTML = "";
+        input.focus();
+        return;
+      }
+
+      let bases = ['A', 'T', 'G', 'C'];
+      let arr = dna.split("");
+      let pos = Math.floor(Math.random() * arr.length);
+      let newBase = bases[Math.floor(Math.random() * 4)];
+
+      if (type === "substitution") {
+        arr[pos] = newBase;
+      } else if (type === "insertion") {
+        arr.splice(pos, 0, newBase);
+      } else if (type === "deletion") {
+        arr.splice(pos, 1);
+      }
+
+      msg.innerHTML = "Original DNA:"+dna;
+      msg2.innerHTML = "Mutated DNA:"+arr.join("");
+    }
+  </script>
+</body>
+</html>
