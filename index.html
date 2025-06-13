@@ -93,6 +93,8 @@
       if (dna === "") {
         alert("DNA cannot be blank");
         msg.innerHTML = "";
+	              msg2.innerHTML = "";
+
         input.focus();
         return;
       }
@@ -100,6 +102,8 @@
       if (!dna.match(/^[ATGC]+$/)) {
         alert("Enter valid DNA (only A, T, G, C)");
         msg.innerHTML = "";
+	              msg2.innerHTML = "";
+
         input.focus();
         return;
       }
