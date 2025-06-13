@@ -90,11 +90,11 @@
       let input = document.getElementById("idna");
       let dna = input.value.trim().toUpperCase();
 
-      if (dna === "") {
-        alert("DNA cannot be blank");
+      if (dna.trim() === "") {
+        alert("DNA cannot be blank or blank spaces");
         msg.innerHTML = "";
 	              msg2.innerHTML = "";
-
+input="";
         input.focus();
         return;
       }
@@ -103,7 +103,7 @@
         alert("Enter valid DNA (only A, T, G, C)");
         msg.innerHTML = "";
 	              msg2.innerHTML = "";
-
+input="";
         input.focus();
         return;
       }
